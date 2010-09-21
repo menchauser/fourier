@@ -1,5 +1,7 @@
 package ru.ssau.karanashev.complex;
 
+import java.util.List;
+
 /**
  * User: Mukhamed Karanashev
  * Date: Sep 21, 2010
@@ -13,6 +15,19 @@ public class ComplexSample {
     public ComplexSample(int size) {
         real = new double[size];
         image = new double[size];
+    }
+
+    public ComplexSample(List sample)
+    {
+        real = new double[sample.size()];
+        image = new double[sample.size()];
+
+        for (int i = 0; i < sample.size(); i++)
+        {
+            double val = (Double) sample.get(i);
+            real[i] = val;
+            image[i] = 0;
+        }
     }
 
     public int size()

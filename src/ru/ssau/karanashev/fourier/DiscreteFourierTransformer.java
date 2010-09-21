@@ -3,6 +3,11 @@ package ru.ssau.karanashev.fourier;
 import ru.ssau.karanashev.complex.ComplexOperations;
 import ru.ssau.karanashev.complex.ComplexSample;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  * User: Mukhamed Karanashev
  * Date: Sep 21, 2010
@@ -43,5 +48,31 @@ public class DiscreteFourierTransformer {
         return result;
     }
 
-    
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new FileReader("C:/sample.txt"));
+        
+        List<Double> vals = new ArrayList<Double>();
+        String line;
+        while((line = in.readLine()) != null)
+        {
+            double val = Double.parseDouble(line);
+            vals.add(val);
+        }
+
+        System.out.println("Read " + vals.size() + " values");
+
+        ComplexSample sample = new ComplexSample(vals);
+
+        ComplexSample result = new DiscreteFourierTransformer().transform(sample);
+
+        PrintWriter pr = new PrintWriter(new FileOutputStream("C:/sample_ft_java.txt"));
+
+        for (int i = 0; i < result.size(); i++)
+        {
+            pr.printf("%11.8f + i%11.8f\n", result.getReal(i), result.getImage(i));
+        }
+
+        pr.flush();
+        pr.close();
+    }
 }
