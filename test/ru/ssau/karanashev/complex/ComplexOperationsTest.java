@@ -1,7 +1,9 @@
 package ru.ssau.karanashev.complex;
 
 import junit.framework.TestCase;
+import org.junit.Test;
 
+import static ru.ssau.karanashev.complex.ComplexOperations.exp;
 import static ru.ssau.karanashev.complex.ComplexOperations.mult;
 
 /**
@@ -13,6 +15,7 @@ public class ComplexOperationsTest extends TestCase {
 
     public static final double EPS = 1e-10;
 
+    @Test
     public void testMult() {
         double a = 0, b = 0, c = 0, d = 0;
 
@@ -24,11 +27,28 @@ public class ComplexOperationsTest extends TestCase {
         assertEquals(result[1], 0, EPS);
 
         a = b = c = d = 1;
-
         result = mult(a, b, c, d, result);
 
         assertEquals(result[0], 0, EPS);
         assertEquals(result[1], 2, EPS);
+
+        a = b = 1;
+        c = 2;
+        d = -2;
+        result = mult(a, b, c, d, result);
+
+        assertEquals(result[0], 4, EPS);
+        assertEquals(result[1], 0, EPS);
     }
 
+    @Test
+    public void testExp() {
+        double w = 0;
+
+        double[] result = new double[2];
+
+        result = exp(w, result);
+        assertEquals(result[0], 1, EPS);
+        assertEquals(result[1], 0, EPS);
+    }
 }
