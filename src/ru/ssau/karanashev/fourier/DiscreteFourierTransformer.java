@@ -1,11 +1,14 @@
 package ru.ssau.karanashev.fourier;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.ssau.karanashev.complex.ComplexOperations;
 import ru.ssau.karanashev.complex.ComplexSample;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -48,31 +51,25 @@ public class DiscreteFourierTransformer {
         return result;
     }
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader in = new BufferedReader(new FileReader("C:/sample.txt"));
-        
-        List<Double> vals = new ArrayList<Double>();
-        String line;
-        while((line = in.readLine()) != null)
-        {
-            double val = Double.parseDouble(line);
-            vals.add(val);
-        }
+    public static void main(String[] args) {
 
-        System.out.println("Read " + vals.size() + " values");
+        Logger log = LoggerFactory.getLogger(DiscreteFourierTransformer.class);
+        long startTime = System.nanoTime();
+        
+        Random rand = new Random();
+
+        List<Double> vals = new ArrayList<Double>();
+        for (int i = 0; i < 1000; i++)
+        {
+            vals.add(rand.nextDouble());
+        }
 
         ComplexSample sample = new ComplexSample(vals);
 
         ComplexSample result = new DiscreteFourierTransformer().transform(sample);
 
-        PrintWriter pr = new PrintWriter(new FileOutputStream("C:/sample_ft_java.txt"));
+        long elapsedTime = System.nanoTime() - startTime;
 
-        for (int i = 0; i < result.size(); i++)
-        {
-            pr.printf("%11.8f + i%11.8f\n", result.getReal(i), result.getImage(i));
-        }
-
-        pr.flush();
-        pr.close();
+        log.info("Elapsed time: " + elapsedTime);
     }
 }
