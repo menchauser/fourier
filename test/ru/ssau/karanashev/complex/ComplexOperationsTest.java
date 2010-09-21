@@ -44,11 +44,28 @@ public class ComplexOperationsTest extends TestCase {
     @Test
     public void testExp() {
         double w = 0;
-
         double[] result = new double[2];
-
         result = exp(w, result);
+
         assertEquals(result[0], 1, EPS);
         assertEquals(result[1], 0, EPS);
+
+        w = Math.PI / 2;
+        result = exp(w, result);
+
+        assertEquals(result[0], 0, EPS);
+        assertEquals(result[1], 1, EPS);
+
+        w = Math.PI;
+        result = exp(w, result);
+
+        assertEquals(result[0], -1, EPS);
+        assertEquals(result[1], 0, EPS);
+
+        w = - Math.PI / 2;
+        result = exp(w, result);
+
+        assertEquals(result[0], 0, EPS);
+        assertEquals(result[1], -1, EPS);
     }
 }
