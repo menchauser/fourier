@@ -3,6 +3,7 @@ package ru.ssau.karanashev.complex;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import static ru.ssau.karanashev.TestConstants.EPS;
 import static ru.ssau.karanashev.complex.ComplexOperations.exp;
 import static ru.ssau.karanashev.complex.ComplexOperations.mult;
 
@@ -12,8 +13,6 @@ import static ru.ssau.karanashev.complex.ComplexOperations.mult;
  * Time: 10:36:54 PM
  */
 public class ComplexOperationsTest extends TestCase {
-
-    public static final double EPS = 1e-10;
 
     @Test
     public void testMult() {
@@ -62,7 +61,7 @@ public class ComplexOperationsTest extends TestCase {
         assertEquals(result[0], -1, EPS);
         assertEquals(result[1], 0, EPS);
 
-        w = - Math.PI / 2;
+        w = -Math.PI / 2;
         result = exp(w, result);
 
         assertEquals(result[0], 0, EPS);

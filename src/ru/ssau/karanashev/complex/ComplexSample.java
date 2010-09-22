@@ -19,15 +19,14 @@ public class ComplexSample {
 
     /**
      * Initializing sample with list of real parts.
+     *
      * @param sample list of Double real parts
      */
-    public ComplexSample(List sample)
-    {
+    public ComplexSample(List sample) {
         real = new double[sample.size()];
         image = new double[sample.size()];
 
-        for (int i = 0; i < sample.size(); i++)
-        {
+        for (int i = 0; i < sample.size(); i++) {
             double val = (Double) sample.get(i);
             real[i] = val;
         }
@@ -35,8 +34,7 @@ public class ComplexSample {
 
     /**
      * Returns binary inversed sample
-     * @param src
-     * @param dst
+     *
      * @return
      */
     public ComplexSample binaryInverse() {
@@ -65,15 +63,16 @@ public class ComplexSample {
 
     /**
      * Get sample size
+     *
      * @return sample size
      */
-    public int size()
-    {
+    public int size() {
         return real.length;
     }
 
     /**
      * Get real part of nth complex value
+     *
      * @param n number of complex value in sample
      * @return real part
      */
@@ -83,11 +82,11 @@ public class ComplexSample {
 
     /**
      * Get image part of nth complex value in sample
+     *
      * @param n number of complex value in sample
      * @return image part
      */
-    public double getImage(int n)
-    {
+    public double getImage(int n) {
         return image[n];
     }
 
