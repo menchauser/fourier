@@ -33,7 +33,10 @@ public class ComplexSampleTest extends TestCase {
             System.out.println(result.getReal(i));
         }
 
-        assertTrue(true);
+        assertEquals(sample.getReal(0), result.getReal(0));
+        assertEquals(sample.getReal(1), result.getReal(2));
+        assertEquals(sample.getReal(2), result.getReal(1));
+        assertEquals(sample.getReal(3), result.getReal(3));
     }
 
 }
