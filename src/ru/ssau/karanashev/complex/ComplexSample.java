@@ -33,12 +33,27 @@ public class ComplexSample {
     }
 
     /**
+     * Copying constructor
+     *
+     * @param sample original sample
+     */
+    public ComplexSample(ComplexSample sample) {
+        int size = sample.size();
+        this.real = new double[size];
+        this.image = new double[size];
+
+        System.arraycopy(sample.real, 0, this.real, 0, size);
+        System.arraycopy(sample.image, 0, this.image, 0, size);
+    }
+
+    /**
      * Returns binary inversed sample
      *
      * @return
      */
     public ComplexSample binaryInverse() {
-        ComplexSample dst = new ComplexSample(size());
+        ComplexSample dst = new ComplexSample(this);
+
         int n = size();
         int dl = n / 2;
         int st = n - 1;
@@ -46,8 +61,9 @@ public class ComplexSample {
 
         for (int i = 0; i < st; i++) {
             if (i < j) {
-                dst.setReal(j, getReal(i));
-                dst.setImage(j, getImage(i));
+                double tmp = dst.real[i];
+                dst.real[i] = dst.real[j];
+                dst.real[j] = tmp;
             }
 
             int k = dl;

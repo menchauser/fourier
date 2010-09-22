@@ -1,10 +1,14 @@
 package ru.ssau.karanashev.complex;
 
 import junit.framework.TestCase;
+import org.junit.Before;
 import org.junit.Test;
+import ru.ssau.karanashev.TestConstants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Date: Sep 23, 2010
@@ -14,6 +18,28 @@ import java.util.List;
  */
 public class ComplexSampleTest extends TestCase {
 
+    Map<Integer, Integer> inverseFour;
+    Map<Integer, Integer> inverseEight;
+
+    @Before
+    public void setUp() {
+        inverseFour = new HashMap<Integer, Integer>(4);
+        inverseFour.put(0, 0);
+        inverseFour.put(1, 2);
+        inverseFour.put(2, 1);
+        inverseFour.put(3, 3);
+
+        inverseEight = new HashMap<Integer, Integer>(8);
+        inverseEight.put(0, 0);
+        inverseEight.put(1, 4);
+        inverseEight.put(2, 2);
+        inverseEight.put(3, 6);
+        inverseEight.put(4, 1);
+        inverseEight.put(5, 5);
+        inverseEight.put(6, 3);
+        inverseEight.put(7, 7);
+    }
+
     @Test
     public void testBinaryInverse() {
         List<Double> test = new ArrayList<Double>(4);
@@ -22,21 +48,22 @@ public class ComplexSampleTest extends TestCase {
         }
 
         ComplexSample sample = new ComplexSample(test);
-
-        for (int i = 0; i < sample.size(); i++) {
-            System.out.println(sample.getReal(i));
-        }
-
         ComplexSample result = sample.binaryInverse();
 
-        for (int i = 0; i < result.size(); i++) {
-            System.out.println(result.getReal(i));
+        for (Map.Entry<Integer, Integer> entry : inverseFour.entrySet()) {
+            assertEquals(sample.getReal(entry.getKey()), result.getReal(entry.getValue()), TestConstants.EPS);
         }
 
-        assertEquals(sample.getReal(0), result.getReal(0));
-        assertEquals(sample.getReal(1), result.getReal(2));
-        assertEquals(sample.getReal(2), result.getReal(1));
-        assertEquals(sample.getReal(3), result.getReal(3));
+        test = new ArrayList<Double>(8);
+        for (int i = 0; i < 8; i++) {
+            test.add(new Double(i));
+        }
+        sample = new ComplexSample(test);
+        result = sample.binaryInverse();
+
+        for (Map.Entry<Integer, Integer> entry : inverseEight.entrySet()) {
+            assertEquals(sample.getReal(entry.getKey()), result.getReal(entry.getValue()), TestConstants.EPS);
+        }
     }
 
 }
