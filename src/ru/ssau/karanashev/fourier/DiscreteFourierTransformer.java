@@ -16,7 +16,7 @@ import java.util.Scanner;
  * Date: Sep 21, 2010
  * Time: 10:06:45 PM
  */
-public class DiscreteFourierTransformer {
+public class DiscreteFourierTransformer implements FourierTransformer {
 
     public ComplexSample transform(ComplexSample sample) {
 
