@@ -1,6 +1,7 @@
 package ru.ssau.karanashev.complex;
 
-import static java.lang.Math.*;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 /**
  * User: Mukhamed Karanashev
@@ -12,6 +13,7 @@ public class ComplexOperations {
     /**
      * Multiplies two complex values: a + b*i, c + d*i. Result of multiplication will be stored
      * in the result array. If result array's length is less than 2 - new array will be createn.
+     *
      * @param a
      * @param b
      * @param c
@@ -20,8 +22,7 @@ public class ComplexOperations {
      * @return reference to result array
      */
     public static double[] mult(double a, double b, double c, double d, double[] result) {
-        if (result.length < 2)
-        {
+        if (result.length < 2) {
             result = new double[2];
         }
 
@@ -33,18 +34,19 @@ public class ComplexOperations {
 
     /**
      * Calculates complex exponent exp(i*w). Exponent will be
+     *
      * @param w
      * @return
      */
     public static double[] exp(double w, double[] result) {
-        if (result.length < 2)
-        {
+
+        if (result == null || result.length < 2) {
             result = new double[2];
         }
 
         result[0] = cos(w);
         result[1] = sin(w);
-        
+
         return result;
     }
 

@@ -44,6 +44,12 @@ public class ComplexOperationsTest extends TestCase {
     public void testExp() {
         double w = 0;
         double[] result = new double[2];
+
+        result = exp(w, null);
+
+        assertEquals(result[0], 1, EPS);
+        assertEquals(result[1], 0, EPS);
+
         result = exp(w, result);
 
         assertEquals(result[0], 1, EPS);
