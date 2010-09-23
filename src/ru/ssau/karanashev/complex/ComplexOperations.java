@@ -22,7 +22,7 @@ public class ComplexOperations {
      * @return reference to result array
      */
     public static double[] mult(double a, double b, double c, double d, double[] result) {
-        if (result.length < 2) {
+        if (result == null || result.length < 2) {
             result = new double[2];
         }
 
