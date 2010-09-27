@@ -17,22 +17,29 @@ public class FastFourierTransformerTest extends TestCase {
 
     @Test
     public void testTransform() {
-        Random r = new Random();
-        int N = 8;
+        int size = 2;
 
-        ComplexSample sample = new ComplexSample(N);
-
-        for (int i = 0; i < N; i++) {
-            sample.setReal(i, r.nextDouble());
-            sample.setImage(i, r.nextDouble());
-        }
+        ComplexSample sample = generateRandomSample(2);
 
         ComplexSample dftResult = new DiscreteFourierTransformer().transform(sample);
         ComplexSample fftResult = new FastFourierTransformer2().transform(sample);
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < size; i++) {
             assertEquals(dftResult.getReal(i), fftResult.getReal(i), TestConstants.EPS);
         }
+    }
+
+    public ComplexSample generateRandomSample(int size) {
+        Random r = new Random();
+
+        ComplexSample sample = new ComplexSample(size);
+
+        for (int i = 0; i < size; i++) {
+            sample.setReal(i, r.nextDouble());
+            sample.setImage(i, r.nextDouble());
+        }
+
+        return sample;
     }
 
 }
