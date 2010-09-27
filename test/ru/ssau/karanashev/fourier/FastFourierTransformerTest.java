@@ -17,7 +17,11 @@ public class FastFourierTransformerTest extends TestCase {
 
     @Test
     public void testTransform() {
-        int size = 2;
+        testSampleTransform(2);
+        testSampleTransform(4);
+    }
+
+    private void testSampleTransform(int size) {
 
         ComplexSample sample = generateRandomSample(2);
 
@@ -27,9 +31,10 @@ public class FastFourierTransformerTest extends TestCase {
         for (int i = 0; i < size; i++) {
             assertEquals(dftResult.getReal(i), fftResult.getReal(i), TestConstants.EPS);
         }
+
     }
 
-    public ComplexSample generateRandomSample(int size) {
+    private ComplexSample generateRandomSample(int size) {
         Random r = new Random();
 
         ComplexSample sample = new ComplexSample(size);
