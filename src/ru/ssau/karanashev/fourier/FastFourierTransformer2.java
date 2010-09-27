@@ -1,7 +1,8 @@
 package ru.ssau.karanashev.fourier;
 
-import ru.ssau.karanashev.complex.ComplexOperations;
 import ru.ssau.karanashev.complex.ComplexSample;
+
+import static ru.ssau.karanashev.complex.ComplexOperations.*;
 
 /**
  * Date: Sep 22, 2010
@@ -21,40 +22,21 @@ public class FastFourierTransformer2 implements FourierTransformer {
             throw new IllegalArgumentException("Sample size must be power of 2");
         }
 
-        ComplexSample[] resultPair = new ComplexSample[2];
-        resultPair[0] = sample.binaryInverse();
-        resultPair[1] = new ComplexSample(size);
+        ComplexSample rhs = sample.binaryInverse();
+        ComplexSample lhs = new ComplexSample(size);
 
-        // n - current 'level'
-        int n = 2;
-        while (n <= size) {
+        double[] x0 = rhs.get(0);
+        double[] x1 = rhs.get(1);
 
-            ComplexSample lhs = resultPair[(n >> 2) % 2];
-            ComplexSample rhs = resultPair[1 - (n >> 2) % 2];
+        double coef = -(Math.PI);
 
-            for (int i = 0; i < n / 2; i++) {
-                double x0_r = rhs.getReal(i);
-                double x0_i = rhs.getImage(i);
+        double[] exp_0 = exp(coef * 0, null);
+        double[] exp_1 = exp(coef, null);
 
-                double x1_r = rhs.getReal(i + n / 2);
-                double x1_i = rhs.getImage(i + n / 2);
+        lhs.set(0, add(x0, mult(exp_0, x1, null), null));
+        lhs.set(1, add(x0, mult(exp_1, x1, null), null));
 
-                double coef = -(2 * Math.PI / n) * i;
-                double[] exp = ComplexOperations.exp(coef, null);
-
-                double[] t = ComplexOperations.mult(exp[0], exp[1], x1_r, x1_i, null);
-
-                lhs.setReal(i, x0_r + t[0]);
-                lhs.setImage(i, x0_i + t[1]);
-
-                lhs.setReal(i + n / 2, x0_r - t[0]);
-                lhs.setImage(i + n / 2, x0_i - t[1]);
-            }
-
-            n <<= 1;
-        }
-
-        return resultPair[(n >> 2) % 2];
+        return lhs;
     }
 
 }

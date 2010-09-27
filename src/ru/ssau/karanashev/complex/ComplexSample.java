@@ -87,6 +87,31 @@ public class ComplexSample {
     }
 
     /**
+     * Get nth complex value as double pair
+     *
+     * @param n
+     * @return
+     */
+    public double[] get(int n) {
+        return new double[]{getReal(n), getImage(n)};
+    }
+
+    /**
+     * Set nth complex value with double pair
+     *
+     * @param n
+     * @param val
+     */
+    public void set(int n, double[] val) {
+        if (val == null || val.length != 2) {
+            throw new IllegalArgumentException("Value must be of complex type (double[2])");
+        }
+
+        setReal(n, val[0]);
+        setImage(n, val[1]);
+    }
+
+    /**
      * Get real part of nth complex value
      *
      * @param n number of complex value in sample
