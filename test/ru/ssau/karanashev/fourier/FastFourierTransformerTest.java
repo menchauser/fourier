@@ -23,7 +23,7 @@ public class FastFourierTransformerTest extends TestCase {
 
     private void testSampleTransform(int size) {
 
-        ComplexSample sample = generateRandomSample(2);
+        ComplexSample sample = generateRandomSample(size);
 
         ComplexSample dftResult = new DiscreteFourierTransformer().transform(sample);
         ComplexSample fftResult = new FastFourierTransformer2().transform(sample);

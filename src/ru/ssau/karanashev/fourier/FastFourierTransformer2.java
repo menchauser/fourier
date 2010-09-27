@@ -25,16 +25,24 @@ public class FastFourierTransformer2 implements FourierTransformer {
         ComplexSample rhs = sample.binaryInverse();
         ComplexSample lhs = new ComplexSample(size);
 
-        double[] x0 = rhs.get(0);
-        double[] x1 = rhs.get(1);
+        if (sample.size() == 2) {
+            double[] x0 = rhs.get(0);
+            double[] x1 = rhs.get(1);
 
-        double coef = -(Math.PI);
+            double coef = -(Math.PI);
 
-        double[] exp_0 = exp(coef * 0, null);
-        double[] exp_1 = exp(coef, null);
+            double[] exp0 = exp(coef * 0, null);
+            double[] exp1 = exp(coef, null);
 
-        lhs.set(0, add(x0, mult(exp_0, x1, null), null));
-        lhs.set(1, add(x0, mult(exp_1, x1, null), null));
+            lhs.set(0, add(x0, mult(exp0, x1, null), null));
+            lhs.set(1, add(x0, mult(exp1, x1, null), null));
+        } else if (sample.size() == 4) {
+            double[] x0 = rhs.get(0);
+            double[] x1 = rhs.get(1);
+
+            double coef = -(2 * Math.PI) / 4;
+
+        }
 
         return lhs;
     }

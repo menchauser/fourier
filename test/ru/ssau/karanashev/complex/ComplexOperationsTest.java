@@ -28,12 +28,39 @@ public class ComplexOperationsTest extends TestCase {
         result = add(aa, bb, result);
         assertEquals(result[0], 0, EPS);
         assertEquals(result[1], 0, EPS);
+
+        result = add(1, 2, 3, 4, result);
+        assertEquals(result[0], 4, EPS);
+        assertEquals(result[1], 6, EPS);
     }
 
     @Test
     public void testAddException() {
         try {
             add(null, new double[4], null);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        fail();
+    }
+
+    @Test
+    public void testSub() {
+        double[] result = sub(0, 0, 0, 0, null);
+
+        assertEquals(result[0], 0, EPS);
+        assertEquals(result[1], 0, EPS);
+
+        result = sub(1, 2, 3, 4, result);
+
+        assertEquals(result[0], -2, EPS);
+        assertEquals(result[1], -2, EPS);
+    }
+
+    @Test
+    public void testSubException() {
+        try {
+            sub(new double[2], new double[1], null);
         } catch (IllegalArgumentException e) {
             return;
         }
@@ -85,6 +112,16 @@ public class ComplexOperationsTest extends TestCase {
         resultArr = mult(aa, bb, resultArr);
         assertEquals(resultArr[0], 4, EPS);
         assertEquals(resultArr[1], 0, EPS);
+    }
+
+    @Test
+    public void testMultException() {
+        try {
+            mult(new double[2], new double[1], null);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        fail();
     }
 
     @Test

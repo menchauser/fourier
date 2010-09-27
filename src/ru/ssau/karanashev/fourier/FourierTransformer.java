@@ -9,5 +9,12 @@ import ru.ssau.karanashev.complex.ComplexSample;
  * @author Mukhamed Karanashev
  */
 public interface FourierTransformer {
+
+    /**
+     * Performs Fast Fourier Transform
+     *
+     * @param sample input sample
+     * @return output sample in the spectral space
+     */
     ComplexSample transform(ComplexSample sample);
 }

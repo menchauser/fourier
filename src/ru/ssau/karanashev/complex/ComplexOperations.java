@@ -22,9 +22,7 @@ public class ComplexOperations {
      * @return
      */
     public static double[] add(double a, double b, double c, double d, double[] result) {
-        if (!isComplex(result)) {
-            result = new double[2];
-        }
+        result = correctValue(result);
 
         result[0] = a + c;
         result[1] = b + d;
@@ -42,16 +40,50 @@ public class ComplexOperations {
      * @return reference to result array
      */
     public static double[] add(double[] a, double[] b, double[] result) {
-        if (!isComplex(a) || !isComplex(b)) {
-            throw new IllegalArgumentException("Arguments must be of complex type (double[2])");
-        }
-
-        if (!isComplex(result)) {
-            result = new double[2];
-        }
+        validateValue(a);
+        validateValue(b);
+        result = correctValue(result);
 
         result[0] = a[0] + b[0];
         result[1] = a[1] + b[1];
+
+        return result;
+    }
+
+    /**
+     * Substracts two complex values: a + b*i, c + d*i
+     *
+     * @param a
+     * @param b
+     * @param c
+     * @param d
+     * @param result
+     * @return
+     */
+    public static double[] sub(double a, double b, double c, double d, double[] result) {
+        result = correctValue(result);
+
+        result[0] = a - c;
+        result[1] = b - d;
+
+        return result;
+    }
+
+    /**
+     * Substracts two complex values: a, b
+     *
+     * @param a
+     * @param b
+     * @param result
+     * @return
+     */
+    public static double[] sub(double[] a, double[] b, double[] result) {
+        validateValue(a);
+        validateValue(b);
+        result = correctValue(result);
+
+        result[0] = a[0] - b[0];
+        result[1] = a[1] - b[1];
 
         return result;
     }
@@ -68,9 +100,7 @@ public class ComplexOperations {
      * @return reference to result array
      */
     public static double[] mult(double a, double b, double c, double d, double[] result) {
-        if (!isComplex(result)) {
-            result = new double[2];
-        }
+        result = correctValue(result);
 
         result[0] = a * c - b * d;
         result[1] = b * c + a * d;
@@ -88,13 +118,9 @@ public class ComplexOperations {
      * @return
      */
     public static double[] mult(double[] a, double[] b, double[] result) {
-        if (!isComplex(a) || !isComplex(b)) {
-            throw new IllegalArgumentException("Arguments must be of complex type (double[2])");
-        }
-
-        if (!isComplex(result)) {
-            result = new double[2];
-        }
+        validateValue(a);
+        validateValue(b);
+        result = correctValue(result);
 
         result[0] = a[0] * b[0] - a[1] * b[1];
         result[1] = a[1] * b[0] + a[0] * b[1];
@@ -109,10 +135,7 @@ public class ComplexOperations {
      * @return
      */
     public static double[] exp(double w, double[] result) {
-
-        if (!isComplex(result)) {
-            result = new double[2];
-        }
+        result = correctValue(result);
 
         result[0] = cos(w);
         result[1] = sin(w);
@@ -122,6 +145,20 @@ public class ComplexOperations {
 
     private static boolean isComplex(double[] val) {
         return (val != null && val.length == 2);
+    }
+
+    private static double[] correctValue(double[] val) {
+        if (!isComplex(val)) {
+            return new double[2];
+        }
+        return val;
+    }
+
+    private static double[] validateValue(double[] val) {
+        if (!isComplex(val)) {
+            throw new IllegalArgumentException("Argument must be of complex type (double[2])");
+        }
+        return val;
     }
 
 }
